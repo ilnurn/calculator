@@ -10,15 +10,15 @@ import pro.sky.java.course2.calculator.calculator.service.CalculatorService;
 @RequestMapping("/calculator")
 public class FirstController {
 
-    @GetMapping()
-    public String welcome() {
-        return calculatorService.getWelcome();
-    }
-
     CalculatorService calculatorService;
 
     FirstController(CalculatorService calculatorService) {
         this.calculatorService = calculatorService;
+    }
+
+    @GetMapping()
+    public String welcome() {
+        return calculatorService.getWelcome();
     }
 
     @GetMapping(path = "/plus")
@@ -38,9 +38,6 @@ public class FirstController {
 
     @GetMapping(path = "/divide")
     public String divide(@RequestParam int num1, @RequestParam int num2) {
-        if (num2 == 0) {
-            return "На ноль делить нельзя";
-        }
         return num1 + "/" + num2 + "=" + calculatorService.getDivide(num1, num2);
     }
 }
